@@ -109,6 +109,8 @@ $(document).ready(function () {
     var action = $('#addFaculty').attr('action');
     var fname = $('#faculty-name').val();
     var schoolename = $('#school-name').val();
+    var schoolid = $('#faculty-school-id').val();
+    var fid = $('#faculty-id').val();
     var facultynonce = $('input[name=faculty-nonce]').val();
     var imgurl = $('#faculty-img').val();
     if (fname == '' || fname == null) {
@@ -116,6 +118,13 @@ $(document).ready(function () {
       return;
     } else if (schoolename == '' || schoolename == null) {
       alert('School name is required');
+      return;
+    } else if (schoolid == '' || schoolid == null || isNaN(Number(schoolid))) {
+      alert('School ID is required and it must be number');
+      return;
+    }
+    else if (fid == '' || fid == null ||isNaN(Number(fid))) {
+      alert('Faculty ID is required and it must be number');
       return;
     } else if (imgurl == '' || imgurl == null) {
       alert('Image  is required');
@@ -125,12 +134,14 @@ $(document).ready(function () {
         action: action,
         fname: fname,
         schoolename: schoolename,
+        schoolid:schoolid,
+        fid:fid,
         facultynonce: facultynonce,
         imgurl: imgurl
       }
       $.ajax({
         url: faculty_admin_obj.ajax_url,
-        method: 'Post',
+        method: 'POST',
         data: data,
         beforeSend: function () {
           $('.fullbodyoverlay').css('display', 'block');
@@ -202,6 +213,8 @@ $(document).ready(function () {
         $('#update-img-preview').attr("src", data.data[0]['image_url']);
         $('#update-faculty-name').val(data.data[0]['name']);
         $('#update-faculty-school').val(data.data[0]['school_name']);
+        $('#update-faculty-school-id').val(data.data[0]['school_order']);
+        $('#update-faculty-id').val(data.data[0]['faculty_order']);
         $('#update-faculty-img').val(data.data[0]['image_url']);
 
 
@@ -225,7 +238,9 @@ $(document).ready(function () {
     var action = $('#UpdateFaculty').attr('action');
     var id = $('#UpdateFaculty').attr('updateFacultyId');
     var fname = $('#update-faculty-name').val();
-    var schoolename = $('#update-faculty-school').val();
+    var schoolename = $('#update-faculty-school').val();    
+    var schoolid = $('#update-faculty-school-id').val();
+    var fid = $('#update-faculty-id').val();
     var facultynonce = $('input[name=update_faculty-nonce]').val();
     var imgurl = $('#update-faculty-img').val();
     if (fname == '' || fname == null) {
@@ -233,6 +248,13 @@ $(document).ready(function () {
       return;
     } else if (schoolename == '' || schoolename == null) {
       alert('School name is required');
+      return;
+    } else if (schoolid == '' || schoolid == null || isNaN(Number(schoolid))) {
+      alert('School ID is required and it must be number');
+      return;
+    }
+    else if (fid == '' || fid == null  || isNaN(Number(fid))) {
+      alert('Faculty ID is required and it must be number');
       return;
     } else if (imgurl == '' || imgurl == null) {
       alert('Image  is required');
@@ -245,6 +267,8 @@ $(document).ready(function () {
         facultynonce: facultynonce,
         imgurl: imgurl,
         id: id,
+        fid:fid,
+        schoolid:schoolid,
       }
       $.ajax({
         url: faculty_admin_obj.ajax_url,
@@ -259,7 +283,7 @@ $(document).ready(function () {
         },
         error: function (data) {
           // console.log('e');
-          console.log(data);
+          console.log(data.data);
 
         }
 

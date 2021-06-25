@@ -7,10 +7,10 @@ class AddMenues
     }
 public function AddFacultyMenu(){
     add_menu_page(
-        "All Faculty",
-         "All Faculty", 
+        "JGU Faculty",
+         "JGU Faculty", 
          "manage_options", 
-         "all-faculty", 
+         "jgu-faculty", 
          array($this,'all_faculty'), 
          'dashicons-id-alt', 
          21 );

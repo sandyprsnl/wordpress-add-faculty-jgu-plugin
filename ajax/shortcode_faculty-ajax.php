@@ -16,7 +16,7 @@ class ShortCodeFacultyAjax
     private function gettotalfaculties()
     {
         $totalfaculties =  $this->wpdb->get_results("SELECT COUNT(id) as total FROM $this->wpdb_tablename ");
-        return $total = $totalfaculties[0]->total;
+        return  $totalfaculties[0]->total;
     }
     public function shortcodeAjaxLoadfaculty()
     {
@@ -24,14 +24,14 @@ class ShortCodeFacultyAjax
         $row = $_POST['row'];
         $nameFilter = $_POST['namefilter'];
         $schoolfilter = $_POST['schoolfilter'];
-        $rowperpage = 3;
+        $rowperpage = 50;
         $total = $this->gettotalfaculties();
         $facultiesquery = "SELECT * FROM $this->wpdb_tablename ";
         if (!empty($schoolfilter) || !empty($nameFilter)) {
 
             $facultiesquery .= "WHERE name ='" . $nameFilter . "' OR school_name = '" . $schoolfilter . "' ";
         }
-        $facultiesquery .= " limit $row,$rowperpage ";
+        $facultiesquery .= " ORDER BY school_order ASC,faculty_order ASC limit $row,$rowperpage ";
         $facultiesresult =  $this->wpdb->get_results($facultiesquery);
 
         $facultyhtml = $this->facultyhtml($facultiesresult);
@@ -62,7 +62,7 @@ class ShortCodeFacultyAjax
 
             $facultiesquery .= "WHERE name ='" . $nameFilter . "' OR school_name = '" . $schoolfilter . "' ";
         }
-        $facultiesquery .= " limit $row,$rowperpage ";
+        $facultiesquery .= " ORDER BY school_order ASC,faculty_order ASC limit $row,$rowperpage ";
         // print_r($facultiesquery);
         $facultiesresult =  $this->wpdb->get_results($facultiesquery);
 

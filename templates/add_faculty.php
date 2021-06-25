@@ -1,7 +1,7 @@
 <?php
 global $wpdb;
 $wpdb_tablename = $wpdb->prefix . 'faculty';
-$faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
+$faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename  ORDER BY school_order ASC,faculty_order ASC");
 ?>
 <div class="fullbodyoverlay" style="display:none">
 <img src="<?php echo NECURL."assets/img/loadinggif.gif"?>" alt="">
@@ -20,6 +20,8 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
                 <th scope="col">Name</th>
                 <th scope="col">School Name</th>
                 <th scope="col">Images</th>
+                <th scope="col">School ID</th>
+                <th scope="col">Faculty ID</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -30,6 +32,8 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
                 echo "<td>" . $faculty->name . "</td>";
                 echo "<td>" . $faculty->school_name . "</td>";
                 echo "<td><img src=" . $faculty->image_url . " width='50px' height='50px'/></td>";
+                echo "<td>" . $faculty->school_order . "</td>";
+                echo "<td>" . $faculty->faculty_order . "</td>";
                 echo "<td> <img  class='edit-faculty' edit-faculty=' ". $faculty->id ."' src='".NECURL."assets/img/pencil.svg' ><img class='delete-faculty' delete-faculty=' ". $faculty->id ."' src='".NECURL."assets/img/delete.svg' ></td>";
 
                 echo "</tr>";
@@ -72,6 +76,18 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
                                 <div class="form-group">
                                     <label for="school">School</label>
                                     <input type="text" class="form-control" id="school-name" name="school" placeholder="School Name...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">School ID</label>
+                                    <input type="text" class="form-control" id="faculty-school-id" name="faculty-school-id" placeholder="School ID">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Faculty ID</label>
+                                    <input type="text" class="form-control" id="faculty-id" name="faculty-id" placeholder="Faculty ID">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -118,6 +134,18 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
                                     <input type="text" class="form-control" id="update-faculty-school" name="school" placeholder="School Name...">
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">School ID</label>
+                                    <input type="text" class="form-control" id="update-faculty-school-id" name="update-faculty-school-id" placeholder="School ID">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Faculty ID</label>
+                                    <input type="text" class="form-control" id="update-faculty-id" name="update-faculty-id" placeholder="Faculty ID">
+                                </div>
+                            </div>
                             <div class="col-sm-12">
                                 <div class="form-group text-center">
 
@@ -138,60 +166,3 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename");
         </div>
     </div>
 </div>
-
-<script>
-    // $('#faculty-table').DataTable();
-    $(document).ready(function() {
-        // $('#faculty-table').DataTable();
-
-
-        // ///add faculty 
-        // $('#addFaculty').submit(function(e) {
-        //     e.preventDefault();
-        //     var action = $('#addFaculty').attr('action');
-        //     var fname = $('#faculty-name').val();
-        //     var schoolename = $('#school-name').val();
-        //     var facultynonce = $('input[name=faculty-nonce]').val();
-        //     var imgurl = $('#faculty-img').val();
-        //     if (fname == '' || fname == null) {
-        //         alert('Faculty name is required');
-        //         return;
-        //     } else if (schoolename == '' || schoolename == null) {
-        //         alert('School name is required');
-        //         return;
-        //     } else if (imgurl == '' || imgurl == null) {
-        //         alert('Image  is required');
-        //         return;
-        //     } else {
-        //         data = {
-        //             action: action,
-        //             fname: fname,
-        //             schoolename: schoolename,
-        //             facultynonce: facultynonce,
-        //             imgurl: imgurl
-        //         }
-        //         $.ajax({
-        //             url: faculty_admin_obj.ajax_url,
-        //             method: 'Post',
-        //             data: data,
-        //             success: function(data) {
-        //                 console.log('s');
-        //                 if (data.success) {
-        //                     alert(data.data);
-        //                     location.reload();
-        //                 }
-        //             },
-        //             error: function(data) {
-        //                 // console.log('e');
-        //                 console.log(data);
-
-        //             }
-
-        //         });
-
-        //     }
-
-
-        // });
-    })
-</script>

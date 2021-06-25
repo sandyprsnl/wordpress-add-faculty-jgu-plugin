@@ -19,6 +19,8 @@ $faculty_table = "CREATE TABLE IF NOT EXISTS `{$this->wpdb->base_prefix}faculty`
   name varchar(255) NOT NULL,
   image_url varchar(255) NOT NULL,
   school_name varchar(255) NOT NULL,
+  school_order int NOT NULL,
+  faculty_order int NOT NULL,
   created_at datetime default now(),
   PRIMARY KEY  (id)
 ) $this->charset_collate;";

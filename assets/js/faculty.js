@@ -7,7 +7,7 @@ $(document).ready(function () {
         var namefilter = $("#namefilter").val();
         var row = Number($('#row').val());
 
-        var rowperpage = 3;
+        var rowperpage = 50;
 
 
         $.ajax({
@@ -83,7 +83,7 @@ $(document).ready(function () {
         var namefilter = $("#namefilter").val();
         var row = Number($('#row').val());
 
-        var rowperpage = 3;
+        var rowperpage = 50;
 
 
         $.ajax({

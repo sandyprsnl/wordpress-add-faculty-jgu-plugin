@@ -6,7 +6,7 @@
 /*
 /*
 Plugin Name: Custom functionality
-Description: Add Custom CPT, Add Shortcode,add JGU faculty
+Description: Add Custom CPT, Add Shortcode, Add JGU Members
 Version: 1.0
 Author:  Sandeep Bhardwaj
 */

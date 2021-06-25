@@ -39,11 +39,15 @@ class Faculty
         $fname= sanitize_text_field($_POST['fname']);
         $schoolename= sanitize_text_field( $_POST['schoolename']);
         $imgurl= esc_url_raw($_POST['imgurl']);
+        $schoolid=sanitize_text_field($_POST['schoolid']);
+        $fid=sanitize_text_field($_POST['fid']);
 
         $query=$this->wpdb->insert("{$this->wpdb->base_prefix}faculty", array(
             "name" => $fname,
             "image_url" => $imgurl,
             "school_name" => $schoolename,
+            'school_order'=>$schoolid,
+            'faculty_order'=>$fid,
          ));
          if($query){
              wp_send_json_success( 'Faculty added Successfully', 200 );
@@ -75,7 +79,7 @@ class Faculty
         if($_POST['action']=='editFaculty'){
             $editid=$_POST['editid'];
             $wpdb_tablename = $this->wpdb->prefix . 'faculty';
-        $editfaculties =  $this->wpdb->get_results("SELECT id,name,image_url,school_name FROM $wpdb_tablename WHERE id=$editid");
+        $editfaculties =  $this->wpdb->get_results("SELECT id,name,image_url,school_name,school_order,faculty_order FROM $wpdb_tablename WHERE id=$editid");
         wp_send_json_success(  $editfaculties, 200);
         }
         
@@ -83,37 +87,33 @@ class Faculty
     public function UpdateFaculty(){
         if(!$_POST){
             echo "not post";
-            wp_send_json_error( "Something wrong please try after sometime",404 );
+            wp_send_json_error( "Something wrong please try after sometime",502 );
             return;
         }
 
         
        if( isset($_POST['facultynonce']) && wp_verify_nonce( $_POST['facultynonce'], 'update_faculty' )) {
-
-        $action= $_POST['action'];
         $fname= sanitize_text_field($_POST['fname']);
         $schoolename= sanitize_text_field( $_POST['schoolename']);
+        $schoolid=sanitize_text_field($_POST['schoolid']);
+        $fid=sanitize_text_field($_POST['fid']);
         $imgurl= esc_url_raw($_POST['imgurl']);
-
-        // $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->wpdb->base_prefix}faculty SET time='$current_timestamp' WHERE userid=$userid"));
         $data = array(
                 "name" => $fname,
                 "image_url" => $imgurl,
                 "school_name" => $schoolename,
+                'school_order'=>(int)$schoolid,
+                'faculty_order'=>(int)$fid,
              );
         $where = [ 'id' => $_POST['id']];
-        $updatequery=$this->wpdb->update( $this->wpdb->prefix . 'faculty', $data, $where );
-
-        // $query=$this->wpdb->insert("{$this->wpdb->base_prefix}faculty", array(
-        //     "name" => $fname,
-        //     "image_url" => $imgurl,
-        //     "school_name" => $schoolename,
-        //  ));
+        $updatequery=$this->wpdb->update( $this->wpdb->prefix .'faculty', $data, $where );
+        // print_r($this->wpdb);
          if($updatequery){
              wp_send_json_success( 'Faculty Updated Successfully', 200 );
          }
          else{
-            wp_send_json_error( "Something wrong please try after sometime",404 );
+             echo "not update";
+            wp_send_json_error( "Something wrong please try after sometime",502 );
             return;
          }
 

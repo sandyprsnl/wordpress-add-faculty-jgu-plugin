@@ -150,7 +150,7 @@ class Init
     function admin_css_js(){
         //admin js
         $screen = get_current_screen();
-         if($screen->id =="toplevel_page_all-faculty" ){
+         if($screen->id =="toplevel_page_jgu-faculty" ){
             wp_enqueue_media();
             wp_enqueue_script('jquery-js', NECURL . 'assets/js/jquery.js', array(), '3.6');
             wp_enqueue_script('bootstrap-js', NECURL . 'assets/js/bootstrap/bootstrap.min.js', array('jquery-js'), '4.7');
