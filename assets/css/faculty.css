@@ -1,46 +1,53 @@
-.search-faculty-btn, .load-more-btn{
-    background-color: rgb(26, 78, 155);
-    width: 100%;
-    font-size: 18px;
+.search-faculty-btn,
+.load-more-btn {
+  background-color: rgb(26, 78, 155);
+  width: 100%;
+  font-size: 18px;
   font-family: "Poppins";
   color: rgb(255, 255, 255);
   line-height: 1.2;
   text-align: center;
 }
-.search-profile{
-    border-width: 1px;
-    border-color: rgb(204, 204, 204);
-    border-style: solid;
-    background-color: rgb(255, 255, 255);
-    font-size: 16px;
+.search-profile {
+  border-width: 1px;
+  border-color: rgb(204, 204, 204);
+  border-style: solid;
+  background-color: rgb(255, 255, 255);
+  font-size: 16px;
   font-family: "Poppins";
   color: rgb(136, 136, 136);
   /* line-height: 1.2; */
   text-align: left;
 }
-.faculty-img{
-    padding: 10px 10px 0 10px;
-    height: 200px !important;
+.faculty-img {
+  padding: 10px 10px 0 10px;
+  height: 200px !important;
 }
-.faculty-card{
-    margin: 10px 0;
+.faculty-card {
+  margin: 10px 0;
 }
-.faculty-name{
-    font-size: 18.798px;
+.faculty-name {
+  font-size: 18.798px;
   font-family: "Aleo";
   color: rgb(26, 78, 155);
   font-weight: bold;
   line-height: 1.2;
 }
-.faculty-school{
-    font-size: 16.448px;
+.faculty-school {
+  font-size: 16.448px;
   font-family: "Poppins";
   color: rgb(18, 18, 18);
   line-height: 1.2;
 }
-.load-more-btn{
-    margin: auto;
-    display: block;
-    width: auto;
+.load-more-btn {
+  margin: auto;
+  display: block;
+  width: auto;
 }
-  
+.not-found-error {
+  color: #242424;
+  font-family: "Poppins", Sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2em;
+}

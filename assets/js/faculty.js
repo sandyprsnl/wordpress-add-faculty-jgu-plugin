@@ -25,7 +25,6 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if ( data.data.html != '') {
-                    console.log(data.data.html);
                     $('#all').val(data.data.total);
                     var allcount = Number($('#all').val());
                     if (row <= allcount) {
@@ -60,7 +59,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $('#select-schoole').append(data.data);
-                // console.log(data);
+                console.log(data);
             },
             error: function (result) {
 
@@ -101,7 +100,6 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if ( data.data.html != '') {
-                    console.log(data.data.html);
                     $('#all').val(data.data.total);
                     var allcount = Number($('#all').val());
                     if (row <= allcount) {

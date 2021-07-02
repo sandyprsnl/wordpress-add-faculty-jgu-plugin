@@ -28,10 +28,19 @@ class ShortCodeFacultyAjax
         $total = $this->gettotalfaculties();
         $facultiesquery = "SELECT * FROM $this->wpdb_tablename ";
         if (!empty($schoolfilter) || !empty($nameFilter)) {
-
-            $facultiesquery .= "WHERE name ='" . $nameFilter . "' OR school_name = '" . $schoolfilter . "' ";
+            $facultiesquery .= "WHERE";
+            if (!empty($schoolfilter) && empty($nameFilter)) {
+                $facultiesquery .= " school_order = '" . $schoolfilter . "' ";
+            }
+            if (!empty($nameFilter) && empty($schoolfilter)) {
+                $facultiesquery .= " name LIKE '%" . $nameFilter . "%'";
+            }
+            if (!empty($schoolfilter) && !empty($nameFilter)) {
+                $facultiesquery .= " name LIKE '%" . $nameFilter . "%' AND school_order = '" . $schoolfilter . "' ";
+            }
         }
         $facultiesquery .= " ORDER BY school_order ASC,faculty_order ASC limit $row,$rowperpage ";
+        // print_r($facultiesquery);
         $facultiesresult =  $this->wpdb->get_results($facultiesquery);
 
         $facultyhtml = $this->facultyhtml($facultiesresult);
@@ -40,10 +49,10 @@ class ShortCodeFacultyAjax
     public function loadSchooles()
     {
 
-        $schooles =  $this->wpdb->get_results("SELECT DISTINCT school_name FROM $this->wpdb_tablename ");
+        $schooles =  $this->wpdb->get_results("SELECT DISTINCT school_order, school_name FROM $this->wpdb_tablename ");
         $schooleshtml = "<option value='*'>All</option>";
         foreach ($schooles as $schoole) {
-            $schooleshtml .= "<option value='" . $schoole->school_name . "'>" . $schoole->school_name . "</option>";
+            $schooleshtml .= "<option value='" . $schoole->school_order . "'>" . $schoole->school_name . "</option>";
         }
         wp_send_json_success($schooleshtml, 200);
     }
@@ -72,21 +81,32 @@ class ShortCodeFacultyAjax
     private function facultyhtml(array $faculties)
     {
         $facultyhtml = '';
-        foreach ($faculties as $faculty) {
-            $facultyhtml .= "
-           <div class='col-sm-3'>
-           
-           <div class='card faculty-card' id=#card-" . $faculty->id . ">
-                   <img class='card-img-top faculty-img' src='" . $faculty->image_url . "'
-                       alt='Card image cap'>
-                   <div class='card-body'>
-                       <h3 class='card-text faculty-name text-center'>" . $faculty->name . "</h3>
-                       <p class='card-text faculty-school text-center'>" . $faculty->school_name . "</p>
-                   </div>
-              </div>
-           </div>
-           ";
+        if (!empty($faculties)) {
+            foreach ($faculties as $faculty) {
+                $facultyhtml .= "
+               <div class='col-sm-3'>
+               
+               <div class='card faculty-card' id=#card-" . $faculty->id . ">
+                       <img class='card-img-top faculty-img' src='" . $faculty->image_url . "'
+                           alt='Card image cap'>
+                       <div class='card-body'>
+                           <h3 class='card-text faculty-name text-center'>" . $faculty->name . "</h3>
+                           <p class='card-text faculty-school text-center'>" . $faculty->school_name . "</p>
+                       </div>
+                  </div>
+               </div>
+               ";
+            }
+        } else {
+            $facultyhtml .= " <div class='col-sm-12 not-found-error text-center'>No Faculties Found<div> 
+            <style>
+            .load-more-btn{
+                display : none;
+            }
+            <style>
+            ";
         }
+
         return $facultyhtml;
     }
 }
