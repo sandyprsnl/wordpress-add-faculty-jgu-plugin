@@ -12,6 +12,9 @@ class ShortCodeFacultyAjax
         add_action('wp_ajax_shortcodeAjaxLoadfaculty', array($this, 'shortcodeAjaxLoadfaculty'));
         add_action('wp_ajax_loadSchooles', array($this, 'loadSchooles'));
         add_action('wp_ajax_nameSchoolesFilters', array($this, 'nameSchoolesFilters'));
+        add_action('wp_ajax_nopriv_shortcodeAjaxLoadfaculty', array($this, 'shortcodeAjaxLoadfaculty'));
+        add_action('wp_ajax_nopriv_loadSchooles', array($this, 'loadSchooles'));
+        add_action('wp_ajax_nopriv_nameSchoolesFilters', array($this, 'nameSchoolesFilters'));
     }
     private function gettotalfaculties()
     {
