@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(document).ready(function ($) {
     $('#load-more').on('click', function () {
         var schoolfilter = $("#select-schoole option:selected").val();
         if (schoolfilter == '*') {
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
             },
             success: function (data) {
-                if ( data.data.html != '') {
+                if (data.data.html != '') {
                     $('#all').val(data.data.total);
                     var allcount = Number($('#all').val());
                     if (row <= allcount) {
@@ -32,7 +32,7 @@ $(document).ready(function () {
                         $("#row").val(row);
                         $('#load-more-container').append(data.data.html);
                     }
-                }else{
+                } else {
                     $('#load-more').text('No more faculties');
                     $('#load-more').fadeOut();
                 }
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
     //filters
     $('.search-faculty-btn').click(function () {
-       
+
     });
 
     $('.search-faculty-btn').on('click', function () {
@@ -99,7 +99,7 @@ $(document).ready(function () {
 
             },
             success: function (data) {
-                if ( data.data.html != '') {
+                if (data.data.html != '') {
                     $('#all').val(data.data.total);
                     var allcount = Number($('#all').val());
                     if (row <= allcount) {
@@ -108,7 +108,7 @@ $(document).ready(function () {
                         $('#load-more-container').html('');
                         $('#load-more-container').append(data.data.html);
                     }
-                }else{
+                } else {
                     $('#load-more').text('No more faculties');
                     $('#load-more').fadeOut();
                 }
@@ -125,4 +125,4 @@ $(document).ready(function () {
     });
 
     //   function 
-});
+})(jQuery);

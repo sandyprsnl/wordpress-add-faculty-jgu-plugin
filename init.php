@@ -13,7 +13,7 @@ class Init
         add_shortcode('custom-faculty', array($this, 'facultyshortcode'));
         // add_action('wp_enqueue_scripts', array($this, 'enqueue_js'));
         add_action('admin_enqueue_scripts', array($this, 'admin_css_js'));
-        // add_action('wp_enqueue_scripts', array($this, 'enqueue_css'));
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_css'));
         add_action('init', array($this, 'addEventSubmenues'));
         add_action('init', array($this, 'addNewsSubmenues'));
         $this->load_files();
@@ -49,7 +49,7 @@ class Init
         $this->loadFiles = $attr['files'];
         if ($attr['faculty'] == true) {
             $this->enqueue_js();
-            $this->enqueue_css();
+            // $this->enqueue_css();
             $modal = new FacultyShortCode();
             $message = $modal->modal()->createmodal();
             return $message;
@@ -147,7 +147,7 @@ class Init
         // wp_enqueue_script('booking-validation-js', NECURL . 'assets/validation.js', array(), '1.0');
         wp_enqueue_script('bootstrap-js', NECURL . 'assets/js/bootstrap/bootstrap.min.js', array('jquery-js'), '4.7');
         wp_enqueue_script('bootstrap-bundle-js', NECURL . 'assets/js/bootstrap/bootstrap.bundle.min.js', array('jquery-js'), '4.7');
-        wp_enqueue_script('faculty-js', NECURL . 'assets/js/faculty.js', array(), '1.0');
+        wp_enqueue_script('faculty-js', NECURL . 'assets/js/faculty.js', array('jquery-main-js'), '1.0');
         wp_localize_script(
             'faculty-js',
             'CPT_obj',
