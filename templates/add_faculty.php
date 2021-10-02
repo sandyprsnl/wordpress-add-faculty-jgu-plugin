@@ -18,6 +18,8 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename  ORDER BY school
         <thead>
             <tr class="text-center">
                 <th scope="col">Name</th>
+                <th scope="col">Detaile Page</th>
+                <th scope="col">Designation</th>
                 <th scope="col">School Name</th>
                 <th scope="col">Images</th>
                 <th scope="col">School ID</th>
@@ -30,6 +32,8 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename  ORDER BY school
             foreach ($faculties as $faculty) {
                 echo "<tr class='text-center'>";
                 echo "<td>" . $faculty->name . "</td>";
+                echo "<td>" . $faculty->details_page . "</td>";
+                echo "<td>" . $faculty->designation . "</td>";
                 echo "<td>" . $faculty->school_name . "</td>";
                 echo "<td><img src=" . $faculty->image_url . " width='50px' height='50px'/></td>";
                 echo "<td>" . $faculty->school_order . "</td>";
@@ -76,6 +80,18 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename  ORDER BY school
                                 <div class="form-group">
                                     <label for="school">School</label>
                                     <input type="text" class="form-control" id="school-name" name="school" placeholder="School Name...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Detaile Page</label>
+                                    <input type="text" class="form-control" id="detaile-page" name="detaile-page" placeholder="Detaile Page...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Designation</label>
+                                    <input type="text" class="form-control" id="designation" name="designation" placeholder="Designation...">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -132,6 +148,18 @@ $faculties =  $wpdb->get_results("SELECT * FROM $wpdb_tablename  ORDER BY school
                                 <div class="form-group">
                                     <label for="school">School</label>
                                     <input type="text" class="form-control" id="update-faculty-school" name="school" placeholder="School Name...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Detaile Page</label>
+                                    <input type="text" class="form-control" id="update-detaile-page" name="update-detaile-page" placeholder="Detaile Page...">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="school">Designation</label>
+                                    <input type="text" class="form-control" id="update-designation" name="update-designation" placeholder="Designation...">
                                 </div>
                             </div>
                             <div class="col-sm-6">

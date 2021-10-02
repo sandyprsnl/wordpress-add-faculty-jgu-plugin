@@ -39,6 +39,8 @@ class Faculty
             $action = $_POST['action'];
             $fname = sanitize_text_field($_POST['fname']);
             $schoolename = sanitize_text_field($_POST['schoolename']);
+            $detailePage = sanitize_text_field($_POST['detailePage']);
+            $designation = sanitize_text_field($_POST['designation']);
             $imgurl = esc_url_raw($_POST['imgurl']);
             $schoolid = sanitize_text_field($_POST['schoolid']);
             $fid = sanitize_text_field($_POST['fid']);
@@ -47,6 +49,8 @@ class Faculty
                 "name" => $fname,
                 "image_url" => $imgurl,
                 "school_name" => $schoolename,
+                "details_page" => $detailePage,
+                "designation" => $designation,
                 'school_order' => $schoolid,
                 'faculty_order' => $fid,
             ));
@@ -77,7 +81,7 @@ class Faculty
         if ($_POST['action'] == 'editFaculty') {
             $editid = $_POST['editid'];
             $wpdb_tablename = $this->wpdb->prefix . 'faculty';
-            $editfaculties =  $this->wpdb->get_results("SELECT id,name,image_url,school_name,school_order,faculty_order FROM $wpdb_tablename WHERE id=$editid");
+            $editfaculties =  $this->wpdb->get_results("SELECT id,name,image_url,school_name,details_page, designation, school_order,faculty_order FROM $wpdb_tablename WHERE id=$editid");
             wp_send_json_success($editfaculties, 200);
         }
     }
@@ -92,6 +96,8 @@ class Faculty
         if (isset($_POST['facultynonce']) && wp_verify_nonce($_POST['facultynonce'], 'update_faculty')) {
             $fname = sanitize_text_field($_POST['fname']);
             $schoolename = sanitize_text_field($_POST['schoolename']);
+            $detailePage = sanitize_text_field($_POST['detailePage']);
+            $designation = sanitize_text_field($_POST['designation']);
             $schoolid = sanitize_text_field($_POST['schoolid']);
             $fid = sanitize_text_field($_POST['fid']);
             $imgurl = esc_url_raw($_POST['imgurl']);
@@ -99,6 +105,8 @@ class Faculty
                 "name" => $fname,
                 "image_url" => $imgurl,
                 "school_name" => $schoolename,
+                "details_page" => $detailePage,
+                "designation" => $designation,
                 'school_order' => (int)$schoolid,
                 'faculty_order' => (int)$fid,
             );

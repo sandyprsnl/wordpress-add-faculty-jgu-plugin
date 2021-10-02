@@ -88,15 +88,17 @@ class ShortCodeFacultyAjax
             foreach ($faculties as $faculty) {
                 $facultyhtml .= "
                <div class='col-sm-3'>
-               
+               <a href='".home_url('/').$faculty->details_page."'>
                <div class='card faculty-card' id=#card-" . $faculty->id . ">
                        <img class='card-img-top faculty-img' src='" . $faculty->image_url . "'
                            alt='Card image cap'>
                        <div class='card-body'>
                            <h3 class='card-text faculty-name text-center'>" . $faculty->name . "</h3>
-                           <p class='card-text faculty-school text-center'>" . $faculty->school_name . "</p>
+                         <!---  <p class='card-text faculty-school text-center'>" . $faculty->school_name . "</p>---->
+                           <p class='card-text faculty-school text-center'>" . $faculty->designation . "</p>
                        </div>
                   </div>
+                  </a>
                </div>
                ";
             }

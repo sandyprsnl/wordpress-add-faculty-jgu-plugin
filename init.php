@@ -43,11 +43,18 @@ class Init
     public function facultyshortcode($atts)
     {
         $attr = shortcode_atts(array(
-            'files' => false,
+            'faculty-designation' => false,
             'faculty' => false
         ), $atts);
-        $this->loadFiles = $attr['files'];
+        // $this->loadFiles = $attr['files'];
         if ($attr['faculty'] == true) {
+            $this->enqueue_js();
+            // $this->enqueue_css();
+            $modal = new FacultyShortCode();
+            $message = $modal->modal()->createmodal();
+            return $message;
+        }
+        if ($attr['faculty-designation'] == true) {
             $this->enqueue_js();
             // $this->enqueue_css();
             $modal = new FacultyShortCode();

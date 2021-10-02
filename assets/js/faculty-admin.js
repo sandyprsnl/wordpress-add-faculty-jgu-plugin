@@ -109,6 +109,9 @@ $(document).ready(function () {
     var action = $('#addFaculty').attr('action');
     var fname = $('#faculty-name').val();
     var schoolename = $('#school-name').val();
+    var detailePage = $('#detaile-page').val();
+    var designation = $('#designation').val();
+    var schoolename = $('#school-name').val();
     var schoolid = $('#faculty-school-id').val();
     var fid = $('#faculty-id').val();
     var facultynonce = $('input[name=faculty-nonce]').val();
@@ -118,6 +121,12 @@ $(document).ready(function () {
       return;
     } else if (schoolename == '' || schoolename == null) {
       alert('School name is required');
+      return;
+    }else if (detailePage == '' || detailePage == null) {
+      alert('Detaile Page name is required');
+      return;
+    }else if (designation == '' || designation == null) {
+      alert('Designation name is required');
       return;
     } else if (schoolid == '' || schoolid == null || isNaN(Number(schoolid))) {
       alert('School ID is required and it must be number');
@@ -134,6 +143,8 @@ $(document).ready(function () {
         action: action,
         fname: fname,
         schoolename: schoolename,
+        detailePage: detailePage,
+        designation: designation,
         schoolid:schoolid,
         fid:fid,
         facultynonce: facultynonce,
@@ -212,6 +223,8 @@ $(document).ready(function () {
         $('#facultyUpdateModal').modal('show');
         $('#update-img-preview').attr("src", data.data[0]['image_url']);
         $('#update-faculty-name').val(data.data[0]['name']);
+        $('#update-detaile-page').val(data.data[0]['details_page']);
+        $('#update-designation').val(data.data[0]['designation']);
         $('#update-faculty-school').val(data.data[0]['school_name']);
         $('#update-faculty-school-id').val(data.data[0]['school_order']);
         $('#update-faculty-id').val(data.data[0]['faculty_order']);
@@ -238,7 +251,9 @@ $(document).ready(function () {
     var action = $('#UpdateFaculty').attr('action');
     var id = $('#UpdateFaculty').attr('updateFacultyId');
     var fname = $('#update-faculty-name').val();
-    var schoolename = $('#update-faculty-school').val();    
+    var schoolename = $('#update-faculty-school').val();
+    var detailePage = $('#update-detaile-page').val();
+    var designation = $('#update-designation').val();    
     var schoolid = $('#update-faculty-school-id').val();
     var fid = $('#update-faculty-id').val();
     var facultynonce = $('input[name=update_faculty-nonce]').val();
@@ -248,6 +263,14 @@ $(document).ready(function () {
       return;
     } else if (schoolename == '' || schoolename == null) {
       alert('School name is required');
+      return;
+    }
+    else if (detailePage == '' || detailePage == null) {
+      alert('Detaile Page is required');
+      return;
+    }
+    else if (designation == '' || designation == null) {
+      alert('Designation name is required');
       return;
     } else if (schoolid == '' || schoolid == null || isNaN(Number(schoolid))) {
       alert('School ID is required and it must be number');
@@ -264,6 +287,8 @@ $(document).ready(function () {
         action: action,
         fname: fname,
         schoolename: schoolename,
+        detailePage: detailePage,
+        designation: designation,
         facultynonce: facultynonce,
         imgurl: imgurl,
         id: id,
