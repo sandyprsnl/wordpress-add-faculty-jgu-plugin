@@ -14,8 +14,10 @@ class Init
         // add_action('wp_enqueue_scripts', array($this, 'enqueue_js'));
         add_action('admin_enqueue_scripts', array($this, 'admin_css_js'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_css'));
-        add_action('init', array($this, 'addEventSubmenues'));
-        add_action('init', array($this, 'addNewsSubmenues'));
+        add_action('init', array($this, 'addEventCPT'));
+        add_action('init', array($this, 'addNewsCPT'));
+        add_action('init', array($this, 'addFacultyArticalCPT'));
+        add_action('init', array($this, 'addOverviewCPT'));
         $this->load_files();
     }
     public function load_files()
@@ -62,7 +64,7 @@ class Init
             return $message;
         }
     }
-    public function addEventSubmenues()
+    public function addEventCPT()
     {
         // set up labels
         $labels = array(
@@ -95,7 +97,7 @@ class Init
             )
         );
     }
-    public function addNewsSubmenues()
+    public function addNewsCPT()
     {
         $labels = array(
             'name' => 'News',
@@ -124,6 +126,71 @@ class Init
                 'exclude_from_search' => false,
                 'capability_type' => 'post',
                 'rewrite' => array('slug' => 'news'),
+            )
+        );
+    }
+    public function addFacultyArticalCPT()
+    {
+        // set up labels
+        $labels = array(
+            'name' => 'Faculty Artical',
+            'singular_name' => 'Faculty Artical',
+            'add_new' => 'Add New Faculty Artical',
+            'add_new_item' => 'Add New Faculty Artical',
+            'edit_item' => 'Edit Faculty Artical',
+            'new_item' => 'New Faculty Artical',
+            'all_items' => 'All Faculty Articals',
+            'view_item' => 'View Faculty Artical',
+            'search_items' => 'Search Faculty Articals',
+            'not_found' => 'No Faculty Articals Found',
+            'not_found_in_trash' => 'No Faculty Articals found in Trash',
+            'parent_item_colon' => '',
+            'menu_name' => 'Faculty Artical',
+        );
+        //register post type
+        register_post_type(
+            'faculty_artical',
+            array(
+                'labels' => $labels,
+                'has_archive' => true,
+                'public' => true,
+                'supports' => array('title', 'editor', 'excerpt', 'custom-fields', 'thumbnail', 'page-attributes'),
+                'taxonomies' => array('post_tag', 'category'),
+                'exclude_from_search' => false,
+                'capability_type' => 'post',
+                'rewrite' => array('slug' => 'faculty_articals'),
+            )
+        );
+    }
+    public function addOverviewCPT()
+    {
+        $labels = array(
+            'name' => 'Overview',
+            'singular_name' => 'Overview',
+            'add_new' => 'Add New Overview',
+            'add_new_item' => 'Add New Overview',
+            'edit_item' => 'Edit Overview',
+            'new_item' => 'New Overview',
+            'all_items' => 'All Overview',
+            'view_item' => 'View Overview',
+            'search_items' => 'Search Overview',
+            'not_found' => 'No Overview Found',
+            'not_found_in_trash' => 'No Overview found in Trash',
+            'parent_item_colon' => '',
+            'menu_name' => 'Overview',
+        );
+        //register post type
+        register_post_type(
+            'overview',
+            array(
+                'labels' => $labels,
+                'has_archive' => true,
+                'public' => true,
+                'supports' => array('title', 'editor', 'excerpt', 'custom-fields', 'thumbnail', 'page-attributes'),
+                'taxonomies' => array('post_tag', 'category'),
+                'exclude_from_search' => false,
+                'capability_type' => 'post',
+                'rewrite' => array('slug' => 'overview'),
             )
         );
     }
